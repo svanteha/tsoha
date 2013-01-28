@@ -11,21 +11,21 @@ city VARCHAR(255),
 description VARCHAR(255),
 first_name VARCHAR(255),
 last_name VARCHAR(255),
-phone_number BIGINT(10),
+phone_number BIGINT,
 email VARCHAR(255)
 );
 
 CREATE TABLE sites(
 site_id serial PRIMARY KEY,
-user_id  INT FOREIGN KEY,
+user_id  INT FOREIGN KEY REFERENCES users(user_id),
 secret BOOLEAN DEFAULT true,
 date_created DATETIME()
 );
 
 CREATE TABLE messages(
 message_id serial PRIMARY KEY,
-from_user_id INT FOREIGN KEY,
-to_user_id INT FOREIGN KEY,
+from_user_id INT FOREIGN KEY REFERENCES users(user_id),
+to_user_id INT FOREIGN KEY REFERENCES users(user_id),
 date_sent TIMESTAMP(),
 subject VARCHAR(255),
 message TEXT
@@ -33,15 +33,15 @@ message TEXT
 
 CREATE TABLE contacts(
 contact_id serial PRIMARY KEY,
-user_id INT FOREIGN KEY,
-role_code INT FOREIGN KEY,
+user_id INT FOREIGN KEY REFERENCES users(user_id),
+role_code INT FOREIGN KEY REFERENCES roles(role_code),
 date_contact_from DATE(),
 contact_email VARCHAR(255),
 contact_name VARCHAR(255),
 contact_phone BIGINT()
 );
 
-CREATE TABLE role(
+CREATE TABLE roles(
 role_code serial PRIMARY KEY,
 description VARCHAR(255)
 );
