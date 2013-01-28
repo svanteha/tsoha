@@ -1,6 +1,6 @@
 CREATE TABLE Users(
 user_id serial PRIMARY KEY,
-user_name VARCHAR(255) UNIQUE CHECK (char_length(user_name) > 2),
+username VARCHAR(255) UNIQUE CHECK (char_length(username) > 2),
 password VARCHAR(255) CHECK (char_length(password) > 5),
 banned BOOLEAN DEFAULT false,
 admin BOOLEAN DEFAULT false,

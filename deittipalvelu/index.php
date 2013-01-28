@@ -1,8 +1,6 @@
 <?php
  require('avusteet/yla.php');
- require('avusteet/kanta.php');
- $user = user_info();
-
+ 
  $user_query = create_connection()->prepare("SELECT * FROM Users");
  $user_query->execute();
 
@@ -16,7 +14,7 @@
 
 <ul>
 <?php while($us = $user_query->fetchObject()) { ?>
-<li><a><?php echo $us->user_name; ?></a></li>
+<li><a><?php echo $us->username; ?></a></li>
 <?php } ?>
 </ul>
 

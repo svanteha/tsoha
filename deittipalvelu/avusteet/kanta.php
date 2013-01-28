@@ -12,12 +12,15 @@
   }
 
   function user_info(){
-	session_start;
-	$user_query = create_connection()->prepare("SELECT user_name, user_id, admin FROM users WHERE user_id = ?");
+	session_start();
+	$user_query = create_connection()->prepare("SELECT username, first_name, admin, user_id FROM Users WHERE user_id = ?");
 	$user_query->execute(array($_SESSION["user_id"]));
 	$user = $user_query->fetchObject();
+	if($user->banned){
+	exit();
+	}
 	return $user;
   }
-
-
 ?>
+
+
