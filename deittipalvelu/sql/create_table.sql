@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE Users(
 user_id serial PRIMARY KEY,
 user_name VARCHAR(255) UNIQUE CHECK (char_length(user_name) > 2),
 password VARCHAR(255) CHECK (char_length(password) > 5),
@@ -15,33 +15,38 @@ phone_number BIGINT,
 email VARCHAR(255)
 );
 
-CREATE TABLE sites(
+CREATE TABLE Sites(
 site_id serial PRIMARY KEY,
-user_id  INT FOREIGN KEY REFERENCES users(user_id),
+user_id  INT NOT NULL,
 secret BOOLEAN DEFAULT true,
-date_created DATETIME()
+date_created DATE,
+FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE messages(
+CREATE TABLE Messages(
 message_id serial PRIMARY KEY,
-from_user_id INT FOREIGN KEY REFERENCES users(user_id),
-to_user_id INT FOREIGN KEY REFERENCES users(user_id),
+from_user_id INT,
+to_user_id INT,
 date_sent TIMESTAMP(),
 subject VARCHAR(255),
-message TEXT
+message TEXT,
+FOREIGN KEY (from_user_id) REFERENCES Users(user_id),
+FOREIGN KEY (to_user_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE contacts(
+CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
 user_id INT FOREIGN KEY REFERENCES users(user_id),
 role_code INT FOREIGN KEY REFERENCES roles(role_code),
 date_contact_from DATE(),
 contact_email VARCHAR(255),
 contact_name VARCHAR(255),
-contact_phone BIGINT()
+contact_phone BIGINT,
+FOREIGN KEY (user_id) REFERENCES Users(user_id),
+FOREIGN KEY (role_code) REFERENCES Roles(role_code)
 );
 
-CREATE TABLE roles(
+CREATE TABLE Roles(
 role_code serial PRIMARY KEY,
 description VARCHAR(255)
 );
