@@ -1,11 +1,11 @@
-<?php
-require('avusteet/kanta.php');
+<?php 
+require 'avusteet/kanta.php';
 if(isset($_POST["username"])){
 	$user_query = create_connection()->prepare("SELECT * FROM Users WHERE username = ? AND password = ?");
 	$user_query->execute(array($_POST["username"], $_POST["password"]));
 	$user = $user_query->fetchObject();
 	if($user->banned){
-		$error_msg = "Olet bannatty, adminiin yhteys...";
+		$error_msg = "Banned, adminiin yhteys";
 	}
 	else if($user){
 		session_start();
@@ -17,11 +17,11 @@ if(isset($_POST["username"])){
 		$error_msg = "Käyttäjätunnus tai salasana väärin";
 	}
 }
+
 ?>
 <?php
-require('avusteet/yla.php');
+require 'avusteet/yla.php';
 ?>
-<h2>Kirjautuminen</h2>
 <?php 
 if(isset($error_msg)) echo "<p>$error_msg</p>"; 
 ?>
