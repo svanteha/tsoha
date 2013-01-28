@@ -27,7 +27,7 @@ CREATE TABLE Messages(
 message_id serial PRIMARY KEY,
 from_user_id INT,
 to_user_id INT,
-date_sent TIMESTAMP(),
+date_sent TIMESTAMP,
 subject VARCHAR(255),
 message TEXT,
 FOREIGN KEY (from_user_id) REFERENCES Users(user_id),
