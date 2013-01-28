@@ -36,9 +36,9 @@ FOREIGN KEY (to_user_id) REFERENCES Users(user_id)
 
 CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
-user_id INT FOREIGN KEY REFERENCES users(user_id),
-role_code INT FOREIGN KEY REFERENCES roles(role_code),
-date_contact_from DATE(),
+user_id INT,
+role_code INT,
+date_contact_from DATE,
 contact_email VARCHAR(255),
 contact_name VARCHAR(255),
 contact_phone BIGINT,
