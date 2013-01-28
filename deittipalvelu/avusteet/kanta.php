@@ -1,22 +1,13 @@
 <?php
 
-  function luo_yhteys(){
+  function create_connection(){
   	try {
-      		$yhteys = new PDO("pgsql:host=localhost;dbname=svanteha",
-                        "svanteha");
+      		$connection = new PDO("pgsql:host=localhost;dbname=svanteha",
+                        	      "svanteha", "9c9daaf68a655bb6");
   	} catch (PDOException $e) {
-      		die("Virhe: " . $e->getMessage());
+      		die("error: " . $e->getMessage());
   	}
-  	$yhteys->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  	return $yhteys;
-  }
-
-
-  function kayttajatiedot(){
-  	session_start();
-  	$kayttaja_kysely = luo_kantayhteys()->prepare("SELECT nimi, tunnus, admin, 					banned, id FROM kayttajat where id = ?");
-  	$kayttaja_kysely->execute(array($_SESSION["kayttaja_id"]));
-  	$kayttaja = $kayttaja_kysely->fetchObject();
-  	return $kayttaja;
+  	$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  	return $connection;
   }
 ?>
