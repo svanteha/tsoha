@@ -26,8 +26,8 @@ require 'avusteet/yla.php';
 if(isset($error_msg)) echo "<p>$error_msg</p>"; 
 ?>
 <form action="sign_in.php" method="POST">
-Käyttäjätunnus: <input type="text" name="username" /><br />
-Salasana: <input type="password" name="password" />
+<input type="text" name="username" />Käyttäjätunnus<br>
+<input type="password" name="password" />Salasana<br>
 <input type="submit" value="Kirjaudu" />
 </form>
 

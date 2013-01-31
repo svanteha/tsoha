@@ -10,6 +10,7 @@
 <?php if(!$user) { ?>
 <p>Tervetuloa Deittipalveluun! Täältä voit löytää itsellesi kumppanin!</p>
 <p>Rekisteröidy tai kirjaudu sisään.</p>
+<p><a href="register.php">Rekisteröidy</a></p>
 
 <?php } ?>
 
@@ -20,6 +21,8 @@
 
 
 <h2>Käyttäjälista</h2>
+
+<p>hejmoi</p>
 
 <ul>
 <?php while($user1 = $user_query->fetchObject()) { ?>
