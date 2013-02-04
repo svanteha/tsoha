@@ -15,7 +15,7 @@
 <?php } ?>
 
 <?php if($user) { ?>
-<p><a href="out.php">Log out</a></p>
+
 
 <?php } ?>
 
