@@ -2,20 +2,20 @@
 require ('avusteet/kanta.php');
 
 if (isset($_POST['user_id'])) {
-	$user = create_connection()->prepare("SELECT * FROM users WHERE user_id = ?");
-	$user->execute(array($_POST(['user_id']));
+	$user = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");
+	$user->execute(array($_POST['user_id']));
 	$xuser=$user->fetchObject();
 	if($xuser->banned) {
-		$user_query1 = create_connection()->prepare("UPDATE users SET banned = false WHERE user_id = ?");
+		$user_query1 = create_connection()->prepare("UPDATE Users SET banned = false WHERE user_id = ?");
 		$user_query1->execute(array($xuser->user_id));
 	}
 	else {
-		$user_query2 = create_connection()->prepare("UPDATE users SET banned = true WHERE user_id = ?");
+		$user_query2 = create_connection()->prepare("UPDATE Users SET banned = true WHERE user_id = ?");
 		$user_query2->execute(array($xuser->user_id));
 	}
 }
 
-$user_query = create_connection()->prepare("SELECT * FROM users ORDER BY username");
+$user_query = create_connection()->prepare("SELECT * FROM Users ORDER BY username");
 $user_query->execute();
 
 require ('avusteet/yla.php');
