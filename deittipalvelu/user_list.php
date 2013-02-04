@@ -10,17 +10,16 @@ if (isset($_POST['user_id'])) {
 		$user_query1->execute(array($xuser->user_id));
 	}
 	else {
-		$user_query2 = create_connection()->prepare("UPDATE users SET banned = true WHERE user_id = =");
+		$user_query2 = create_connection()->prepare("UPDATE users SET banned = true WHERE user_id = ?");
 		$user_query2->execute(array($xuser->user_id));
 	}
 }
 
-$user_query = create_connection()->prepare("SELECT * FROM users ORDER BY first_name");
+$user_query = create_connection()->prepare("SELECT * FROM users ORDER BY username");
 $user_query->execute();
 
 require ('avusteet/yla.php');
 
-$user = user_info();
 if(!$user->admin) {
 	die("Sinulla ei ole asiaa tänne!");
 }

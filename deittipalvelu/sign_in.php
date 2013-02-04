@@ -4,14 +4,15 @@ if(isset($_POST["username"])){
 	$user_query = create_connection()->prepare("SELECT * FROM Users WHERE username = ? AND password = ?");
 	$user_query->execute(array($_POST["username"], $_POST["password"]));
 	$user = $user_query->fetchObject();
-	if($user->banned){
-		$error_msg = "Banned, adminiin yhteys";
-	}
-	else if($user){
+	
+	if($user){
 		session_start();
 		$_SESSION['user_id'] = $user->user_id;
 		header('Location: index.php');
 		exit();
+	}
+	else if($user->banned){
+		$error_msg = "Banned, adminiin yhteys";
 	}
 	else{
 		$error_msg = "Käyttäjätunnus tai salasana väärin";
