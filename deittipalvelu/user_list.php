@@ -1,9 +1,9 @@
 <?php
 require ('avusteet/kanta.php');
 
-if (isset($_POST['user_id'])) {
+if (isset($_POST['banned'])) {
 	$user = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");
-	$user->execute(array($_POST['user_id']));
+	$user->execute(array($_POST['banned']));
 	$xuser=$user->fetchObject();
 	if($xuser->banned) {
 		$user_query1 = create_connection()->prepare("UPDATE Users SET banned = false WHERE user_id = ?");
@@ -13,6 +13,18 @@ if (isset($_POST['user_id'])) {
 		$user_query2 = create_connection()->prepare("UPDATE Users SET banned = true WHERE user_id = ?");
 		$user_query2->execute(array($xuser->user_id));
 	}
+}
+
+if (isset($_POST['del'])) {
+
+	$user = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");
+	$user->execute(array($_POST['del']));
+	$del_user=$user->fetchObject();
+
+	$del_query = create_connection()->prepare("DELETE FROM Users WHERE user_id = ?");
+	$del_query->execute(array($del_user->user_id));
+
+
 }
 
 $user_query = create_connection()->prepare("SELECT * FROM Users ORDER BY username");
@@ -28,16 +40,19 @@ if(!$user->admin) {
 <h2>Käyttäjälista</h2>
 
 <table>
-<th>Käyttäjä</th><th>Ban</th>
+<th>Käyttäjä</th><th>Ban</th><th>Delete user</th>
 <?php while($nuser = $user_query->fetchObject()) { ?>
 	<tr>
 		<td><?php echo $nuser->username; ?> </td>
-		<td><form action="user_list.php" method="POST"><input type = "hidden" value="<?php echo $nuser->user_id ?>" name="user_id"/>
+		<td><form action="user_list.php" method="POST"><input type = "hidden" value="<?php echo $nuser->user_id ?>" name="banned"/>
 		<?php if(!$nuser->banned) { ?>
 			<input type="submit" value="BAN" name="ban" />
 		<?php } else { ?>
-			<input type="submit" value="unBAN" name"unban" />
+			<input type="submit" value="unBAN" name="unban" />
 		<?php } ?>
+		</form></td>
+		<td><form action="user_list.php" method="POST"><input type = "hidden" value="<?php echo $nuser->user_id ?>" name="del" />
+		<input type="submit" value="DELETE" name="delete" />
 		</form></td>
 	</tr>
 <?php } ?>

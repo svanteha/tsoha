@@ -13,6 +13,7 @@
 <p>Terve <?php echo $user->first_name ?></p>
 <?php if($user->admin){ ?>
 <p>Olet ADMIN</p>
+<p><a href="user_list.php">Käyttäjien hallinta</a></p>
 <?php } ?>
 <?php } else { ?>
 <p><a href="sign_in.php">Kirjaudu sisään</a></p>
