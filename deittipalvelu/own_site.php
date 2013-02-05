@@ -10,6 +10,8 @@ $this_user = $user_query->fetchObject();
 
 ?>
 
+
+
 <h2>Oma Sivu</h2>
 
 <p>Käyttäjänimi: <?php echo $this_user->username ?></p>
@@ -21,6 +23,9 @@ $this_user = $user_query->fetchObject();
 <p>Kuvaus: <?php echo $this_user->description ?></p>
 <p>Numero: <?php echo $this_user->phone_number ?></p>
 <p>Sähköposti: <?php echo $this_user->email ?></p>
+<br>
+<a href="edit_info.php">Muokka tietojasi</a>
+
 
 <?php
 require ('avusteet/ala.php');

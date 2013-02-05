@@ -16,7 +16,6 @@
 
 <?php if($user) { ?>
 
-	<p><a href="own_site.php">Oma Sivu</a></p>
 
 <?php } ?>
 

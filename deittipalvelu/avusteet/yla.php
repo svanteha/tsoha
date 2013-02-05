@@ -12,6 +12,7 @@
 <?php if($user){ ?>
 <p>Terve <?php echo $user->first_name ?></p>
 <p><a href="out.php">Log out</a></p>
+<p><a href="own_site.php">Oma sivu</a></p>
 <?php if($user->admin){ ?>
 <p>Olet ADMIN</p>
 <p><a href="user_list.php">Käyttäjien hallinta</a></p>
@@ -24,5 +25,4 @@
 <div>
 <a href="index.php">Etusivulle</a>
 </div>
-<br></br>
 
