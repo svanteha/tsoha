@@ -27,6 +27,20 @@ if (isset($_POST['del'])) {
 
 }
 
+if (isset($_POST['setAdmin'])) {
+	$user = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");
+	$user->execute(array($_POST['setAdmin']));
+	$xuser=$user->fetchObject();
+	if($xuser->admin) {
+		$user_query1 = create_connection()->prepare("UPDATE Users SET admin = false WHERE user_id = ?");
+		$user_query1->execute(array($xuser->user_id));
+	}
+	else {
+		$user_query2 = create_connection()->prepare("UPDATE Users SET admin = true WHERE user_id = ?");
+		$user_query2->execute(array($xuser->user_id));
+	}
+}
+
 $user_query = create_connection()->prepare("SELECT * FROM Users ORDER BY username");
 $user_query->execute();
 
@@ -40,7 +54,7 @@ if(!$user->admin) {
 <h2>Käyttäjälista</h2>
 
 <table>
-<th>Käyttäjä</th><th>Ban</th><th>Delete user</th>
+<th>Käyttäjä </th><th> Ban </th><th> Admin </th><th> Delete user</th>
 <?php while($nuser = $user_query->fetchObject()) { ?>
 	<tr>
 		<td><?php echo $nuser->username; ?> </td>
@@ -49,6 +63,13 @@ if(!$user->admin) {
 			<input type="submit" value="BAN" name="ban" />
 		<?php } else { ?>
 			<input type="submit" value="unBAN" name="unban" />
+		<?php } ?>
+		</form></td>
+		<td><form action="user_list.php" method="POST"><input type = "hidden" value="<?php echo $nuser->user_id ?>" name="setAdmin"/>
+		<?php if(!$nuser->admin) { ?>
+			<input type="submit" value="make admin" name="make_admin" />
+		<?php } else { ?>
+			<input type="submit" value="delete admin" name="delete_admin" />
 		<?php } ?>
 		</form></td>
 		<td><form action="user_list.php" method="POST"><input type = "hidden" value="<?php echo $nuser->user_id ?>" name="del" />
