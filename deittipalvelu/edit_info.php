@@ -20,10 +20,12 @@ $this_user = $user_query->fetchObject();
 <form action="edit_logic.php" method="POST">
 <tr><td><p>Etunimi: </td><td><input type="text" name="edit_first_name" value="<?php echo htmlspecialchars($this_user->first_name) ?>"/></p></td></tr>
 <tr><td><p>Sukunimi: </td><td><input type="text" name="edit_last_name" value="<?php echo htmlspecialchars($this_user->last_name) ?>"/></p></td></tr>
-<tr><td><p>Sukupuoli: </td><td><input type="text" name="edit_gender" value="<?php echo htmlspecialchars($this_user->gender) ?>" /></p></td></tr>
+<tr><td>Sukupuoli: </td><td><input type="radio" name="edit_gender" value="Mies" />Mies</td></tr>
+<tr><td></td><td><input type="radio" name="edit_gender" value="Nainen" />Nainen</td></tr>
+<tr><td></td><td><input type="radio" name="edit_gender" value="Jotain siitä välistä" />Jotain siitä välistä</td></tr>
 <tr><td><p>Maa: </td><td><input type="text" name="edit_country" value="<?php echo htmlspecialchars($this_user->country) ?>"/></p></td></tr>
 <tr><td><p>Kaupunki: </td><td><input type="text" name="edit_city" value="<?php echo htmlspecialchars($this_user->city) ?>"/></p></td></tr>
-<tr><td><p>Kuvaus: </td><td><input type="text" name="edit_description" value="<?php echo htmlspecialchars($this_user->description) ?>"/></p></td></tr>
+<tr><td><p>Kuvaus: </td><td><input type="text" name="edit_description" size="30" value="<?php echo htmlspecialchars($this_user->description) ?>"/></p></td></tr>
 <tr><td><p>Numero: </td><td><input type="text" name="edit_phone_number" value="<?php echo htmlspecialchars($this_user->phone_number) ?>"/></p></td></tr>
 <tr><td><p>Sähköposti: </td><td><input type="text" name="edit_email" value="<?php echo htmlspecialchars($this_user->email) ?>" /></p></td></tr>
 <tr><td><input type="submit" value="Muokkaa" /></tr></td>

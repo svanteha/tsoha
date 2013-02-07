@@ -4,10 +4,11 @@ try{
   if(isset($_POST["username"])){
 	$password = $_POST["password"];
 	$username = $_POST["username"];
+	$age = (int) $_POST["age"];
 
-	$user_query = create_connection()->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+	$user_query = create_connection()->prepare("INSERT INTO Users (username, password, age) VALUES (?, ?, ?)");
 
-	if($password === $_POST["confirmpassword"] && $user_query->execute(array($username, $password))){
+	if($password === $_POST["confirmpassword"] && $age > 17 && $user_query->execute(array($username, $password, $age))){
 		header('Location: sign_in.php');
 		exit();
 	}
@@ -26,6 +27,7 @@ require ('avusteet/yla.php');
 
 <form action="register.php" method="POST">
 <input type="text" name="username" /> Käyttäjänimi <br>
+<input type="text" name="age" /> Ikä <br>
 <input type="password" name="password" /> Salasana <br>
 <input type="password" name="confirmpassword" /> Salasana uudelleen <br>
 <input type="submit" value="Rekisteröi" />

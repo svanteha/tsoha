@@ -8,6 +8,9 @@ $user_query = create_connection()->prepare("SELECT * FROM Users WHERE user_id = 
 $user_query->execute(array($user->user_id));
 $this_user = $user_query->fetchObject();
 
+$contact_query = create_connection()->prepare("SELECT * FROM Contacts WHERE");
+
+
 ?>
 
 
@@ -23,8 +26,10 @@ $this_user = $user_query->fetchObject();
 <p>Kuvaus: <?php echo $this_user->description ?></p>
 <p>Numero: <?php echo $this_user->phone_number ?></p>
 <p>Sähköposti: <?php echo $this_user->email ?></p>
-<br>
 <a href="edit_info.php">Muokka tietojasi</a>
+
+<h2>Kontaktisi</h2>
+
 
 
 <?php

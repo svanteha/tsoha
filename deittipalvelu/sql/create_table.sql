@@ -4,14 +4,16 @@ username VARCHAR(255) UNIQUE CHECK (char_length(username) > 2),
 password VARCHAR(255) CHECK (char_length(password) > 5),
 banned BOOLEAN DEFAULT false,
 admin BOOLEAN DEFAULT false,
-age INT CHECK (age>18),
+sex_pref VARCHAR(255),
+relationship_type VARCHAR(255),
+age INT CHECK (age > 17),
 gender VARCHAR(255),
 country VARCHAR(255),
 city VARCHAR(255),
 description VARCHAR(255),
 first_name VARCHAR(255),
 last_name VARCHAR(255),
-phone_number BIGINT,
+phone_number VARCHAR(255) CHECK (char_length(phone_number) = 10),
 email VARCHAR(255)
 );
 
@@ -37,16 +39,9 @@ FOREIGN KEY (to_user_id) REFERENCES Users(user_id)
 CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
 user_id INT,
-role_code INT,
 date_contact_from DATE,
 contact_email VARCHAR(255),
 contact_name VARCHAR(255),
 contact_phone BIGINT,
-FOREIGN KEY (user_id) REFERENCES Users(user_id),
-FOREIGN KEY (role_code) REFERENCES Roles(role_code)
-);
-
-CREATE TABLE Roles(
-role_code serial PRIMARY KEY,
-description VARCHAR(255)
+FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
