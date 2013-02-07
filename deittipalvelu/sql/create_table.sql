@@ -31,9 +31,17 @@ FOREIGN KEY (to_user_id) REFERENCES Users(user_id)
 CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
 user_id INT,
-date_contact_from DATE,
-contact_email VARCHAR(255),
-contact_name VARCHAR(255),
-contact_phone BIGINT,
-FOREIGN KEY (user_id) REFERENCES Users(user_id)
+contact_user_id INT,
+date_contact_from TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES Users(user_id),
+FOREIGN KEY (contact_user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Pending_requests(
+request_id serial PRIMARY KEY,
+to_user_id INT,
+from_user_id INT,
+date_sent TIMESTAMP,
+FOREIGN KEY (to_user_id) REFERENCES Users(user_id),
+FOREIGN KEY (from_user_id) REFERENCES Users(user_id)
 );
