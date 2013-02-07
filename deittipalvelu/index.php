@@ -24,7 +24,7 @@
 
 <ul>
 <?php while($user1 = $user_query->fetchObject()) { ?>
-	<li><?php echo $user1->username; ?></li>
+	<li><a href="own_site.php?user_id=<?php echo $user1->user_id; ?>"><?php echo $user1->username ?></a></li>
 <?php } ?>
 </ul>
 

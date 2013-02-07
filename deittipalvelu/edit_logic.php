@@ -38,7 +38,7 @@ try {
 	header('Location: own_site.php');
 
 } catch(Exeption $e) {
-	$error_msg = "Yritä uudestaan";
+	$_SESSION["error_msg"] = "Yritä uudestaan";
 	header('Location: edit_info.php');
 }
 

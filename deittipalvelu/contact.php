@@ -1,5 +1,6 @@
 <?php
 require ('avusteet/kanta.php');
+require ('avusteet/yla.php');
 
-$user = user_info();
-$contact = contact_info($_GET["contact"]);
+$user = user_infoa($_GET["user_id"]);
+
