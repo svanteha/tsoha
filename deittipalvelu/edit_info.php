@@ -11,6 +11,8 @@ $this_user = $user_query->fetchObject();
 ?>
 <h2>Muuta tietoja</h2>
 
+<p>EI TYHJIÄ KENTTIÄ!!</p>
+
 <?php if(!empty($_SESSION["error_msg"])) {
 	echo "<p>".$_SESSION["error_msg"]."</p>";
 	unset($_SESSION["error_msg"]);
