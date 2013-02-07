@@ -19,5 +19,11 @@
 	return $user;
   }
 
+  function contact_info($user_id) {
+	$contact_query = create_connection()->prepare("SELECT * FROM users WHERE user_id = ?");
+	$contact_query->execute(array($user_id));
+	return $contact_query->fetchObject();
+  }
+
 ?>
 

@@ -17,14 +17,6 @@ phone_number VARCHAR(255) CHECK (char_length(phone_number) = 10),
 email VARCHAR(255)
 );
 
-CREATE TABLE Sites(
-site_id serial PRIMARY KEY,
-user_id  INT NOT NULL,
-secret BOOLEAN DEFAULT true,
-date_created DATE,
-FOREIGN KEY (user_id) REFERENCES Users(user_id)
-);
-
 CREATE TABLE Messages(
 message_id serial PRIMARY KEY,
 from_user_id INT,
