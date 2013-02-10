@@ -2,12 +2,16 @@
 require ('avusteet/kanta.php');
 require ('avusteet/yla.php');
 
+if (!signed_in()) {
+	header('Location: sign_in.php');
+}
+
 if (isset($_POST["to_user_id"])) {
 	$to_user = user_infoa($_POST["to_user_id"]);
-	$user = user_info();	
+		
 }
 else {
-	header('Location: own_site.php');
+	header('Location: index.php');
 }
 ?>
 

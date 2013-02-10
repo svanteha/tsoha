@@ -31,6 +31,16 @@
 	return $contact_query->fetchObject();
 
   }
+
+  function signed_in(){
+	$user = user_info();
+	if ($user) {
+		return true;
+	}
+	else {
+		return false;
+	}
+  }
   
   
 

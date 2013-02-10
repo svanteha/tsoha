@@ -1,0 +1,37 @@
+header h1 {
+    color: rgb(40, 40, 40);
+}
+
+header nav ul {
+
+    font-size: 1.2em;
+    height: 40px;
+    line-height: 30px;
+    margin: 0 auto 2em auto;
+
+
+    background-color: rgb(40, 40, 40);
+
+    list-style-type: none;
+
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+header nav ul li {
+    float: left; 
+    display: inline; 
+}
+
+header nav ul li a {
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    padding: 5px 1.5em;
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 40, 40);
+}

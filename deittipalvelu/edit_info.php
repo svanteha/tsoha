@@ -2,6 +2,10 @@
 require ('avusteet/kanta.php');
 require ('avusteet/yla.php');
 
+if (!signed_in()) {
+	header('Location: sign_in.php');
+}
+
 $user = user_info();
 
 $user_query = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");

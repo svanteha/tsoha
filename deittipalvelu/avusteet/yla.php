@@ -4,25 +4,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Deittipalvelu</title>
+	<meta charset="utf-8" ></meta>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<title>Deittipalvelu</title>
+</head>
 <body>
-<h1>Deittipalvelu</h1>
+	<header>
+		<h1>Deittipalvelu</h1>
+		<nav>
+			<ul>
+				<?php if($user){ ?>
+					<li><a href="out.php">Log out</a></li>
+					<li><a href="own_site.php">Oma sivu</a></li>
+				<?php if($user->admin){ ?>
+					<li><a href="user_list.php">Käyttäjien hallinta</a></li>
+				<?php } ?>
+				<?php } else { ?>
+					<li><a href="sign_in.php">Kirjaudu sisään</a></li>
+				<?php } ?>
+			</ul>
+		</nav>
+	</header>
 
 <div>
-<?php if($user){ ?>
+<?php if($user) { ?>
 <p>Terve <?php echo $user->first_name ?></p>
-<p><a href="out.php">Log out</a></p>
-<p><a href="own_site.php">Oma sivu</a></p>
-<?php if($user->admin){ ?>
-<p>Olet ADMIN</p>
-<p><a href="user_list.php">Käyttäjien hallinta</a></p>
 <?php } ?>
-<?php } else { ?>
-<p><a href="sign_in.php">Kirjaudu sisään</a></p>
-<?php } ?>
-</div>
-
-<div>
 <a href="index.php">Etusivulle</a>
 </div>
 

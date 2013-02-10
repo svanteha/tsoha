@@ -24,7 +24,7 @@ try {
 		exit();
 	}
 	else {
-		$_SESSION["error_msg"] = "";
+		unset($_SESSION["error_msg"]);
 	}
 	
 	$user_query = create_connection()->prepare("UPDATE Users SET first_name = ?, last_name = ?, gender = ?, country = ?, city = ?,

@@ -2,6 +2,10 @@
 require ('avusteet/kanta.php');
 require ('avusteet/yla.php');
 
+if (!signed_in()) {
+	header('Location: sign_in.php');
+}
+
 if (isset($_GET["user_id"])){
 	
 	$user = user_infoa($_GET["user_id"]);
@@ -27,7 +31,6 @@ else{
 	$isContact = true;
 	$isUser = true;
 }
-	
 ?>
 
 
@@ -47,7 +50,8 @@ else{
 <?php } ?>
 
 <?php if($isUser) { ?>
-<a href="edit_info.php">Muokka tietojasi</a>
+<a href="edit_info.php">Muokka tietojasi</a><br>
+<a href="messages.php">Viestit</a>
 <h2>Kontaktisi</h2>
 <ul>
 <?php while($contact = $contact_query->fetchObject()){ $user_query->execute(array($contact->contact_user_id)); $x = $user_query->fetchObject();?>
