@@ -21,7 +21,7 @@ CREATE TABLE Messages(
 message_id serial PRIMARY KEY,
 from_user_id INT,
 to_user_id INT,
-date_sent TIMESTAMP,
+date_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 subject VARCHAR(255),
 message TEXT,
 FOREIGN KEY (from_user_id) REFERENCES Users(user_id),
@@ -41,7 +41,7 @@ CREATE TABLE Pending_requests(
 request_id serial PRIMARY KEY,
 to_user_id INT,
 from_user_id INT,
-date_sent TIMESTAMP,
+date_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (to_user_id) REFERENCES Users(user_id),
 FOREIGN KEY (from_user_id) REFERENCES Users(user_id)
 );

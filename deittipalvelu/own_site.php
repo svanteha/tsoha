@@ -34,7 +34,6 @@ else{
 
 <h2>Oma Sivu</h2>
 
-
 <p>Käyttäjänimi: <?php echo $this_user->username ?></p>
 <p>Ikä: <?php echo $this_user->age ?></p>
 <p>Sukupuoli: <?php echo $this_user->gender ?></p>
@@ -77,6 +76,13 @@ else{
 	<form action="contact_logic.php" method="POST">
 		<input type="hidden" name="request_user_id" value="<?php echo $this_user->user_id; ?>" />
 		<input type="submit" value="Pyydä kontaktiksi" />
+	</form>
+<?php } ?>
+
+<?php if (!$isUser) { ?>
+	<form action="create_message.php" method="POST">
+		<input type="hidden" name="to_user_id" value="<?php echo $this_user->user_id; ?>" />
+		<input type="submit" value="Lähetä viesti!" />
 	</form>
 <?php } ?>
 

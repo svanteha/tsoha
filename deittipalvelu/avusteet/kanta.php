@@ -30,7 +30,9 @@
 	$contact_query->execute(array($own_user_id, $other_user_id));
 	return $contact_query->fetchObject();
 
- }
+  }
+  
+  
 
 ?>
 
