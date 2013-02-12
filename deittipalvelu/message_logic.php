@@ -8,6 +8,7 @@ try{
 
 		if(empty($subject) || empty($message)) {
 			header('Location: index.php');
+			exit();
 		} 
 
 		$add_message = create_connection()->prepare("INSERT INTO Messages (from_user_id, to_user_id, subject, message) VALUES (?, ?, ?, ?)");

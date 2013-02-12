@@ -41,6 +41,8 @@ else{
 <p>Ikä: <?php echo $this_user->age ?></p>
 <p>Sukupuoli: <?php echo $this_user->gender ?></p>
 <p>Kuvaus: <?php echo $this_user->description ?></p>
+<p>Etsin: <?php echo $this_user->relationship_type ?></p>
+<p>Olen kiinnostunut: <?php echo $this_user->sex_pref ?></p>
 <?php if($isContact or $isUser) { ?>
 <p>Nimi: <?php echo $this_user->first_name ?> <?php echo $this_user->last_name ?></p>
 <p>Maa: <?php echo $this_user->country ?></p>
@@ -51,7 +53,6 @@ else{
 
 <?php if($isUser) { ?>
 <a href="edit_info.php">Muokka tietojasi</a><br>
-<a href="messages.php">Viestit</a>
 <h2>Kontaktisi</h2>
 <ul>
 <?php while($contact = $contact_query->fetchObject()){ $user_query->execute(array($contact->contact_user_id)); $x = $user_query->fetchObject();?>

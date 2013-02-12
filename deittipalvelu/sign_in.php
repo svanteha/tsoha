@@ -25,6 +25,7 @@ if(isset($_POST["username"])){
 <?php
 require 'avusteet/yla.php';
 ?>
+<h2>Kirjaudu</h2>
 <?php 
 if(isset($error_msg)) echo "<p>$error_msg</p>"; 
 ?>
