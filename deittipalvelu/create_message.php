@@ -29,7 +29,7 @@ else {
 
 <form action="message_logic.php" method="POST" id="message_form">
 <input type="hidden" name="to_user_id" value="<?php echo $to_user->user_id; ?>" />
-Aihe: <input type="text" name="subject" />
+<input type="text" placeholder="Aihe" name="subject" />
 <input type="submit" value="Lähetä" />
 </form>
 <br>
