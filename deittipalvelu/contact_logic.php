@@ -10,7 +10,10 @@ try {
 		$pending_query = create_connection()->prepare("INSERT INTO Pending_requests (to_user_id, from_user_id) VALUES (?, ?)");
 		$pending_query->execute(array($request_user->user_id, $this_user->user_id));
 
-		header('Location: index.php');
+		$_SESSION["request_sent"] = "Kontaktipyyntö lähetetty!";
+
+		header('Location: own_site.php?user_id='.$request_user->user_id);
+		exit();
 	}
 	if (isset($_POST["deny_user_id"])) {
 		
@@ -20,12 +23,13 @@ try {
 		$delete_query->execute(array($this_user->user_id, $deny_user->user_id));
 		
 		header('Location: own_site.php');
+		exit();
 	}
 	if (isset($_POST["accept_user_id"])) {
 
 		$accept_user = user_infoa($_POST["accept_user_id"]);
 
-		$add_query = create_connection()->prepare("INSERT INTO Contacts (user_id, contact_user_id) VALUES (?, ?)");
+		$add_query = create_connection()->prepare("INSERT INTO Contacts (this_user_id, contact_user_id) VALUES (?, ?)");
 		$add_query->execute(array($this_user->user_id, $accept_user->user_id));
 		$add_query->execute(array($accept_user->user_id, $this_user->user_id));
 

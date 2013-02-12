@@ -26,11 +26,17 @@
   }
 	
   function isContact($own_user_id, $other_user_id) {
-	$contact_query = create_connection()->prepare("SELECT user_id, contact_user_id FROM Contacts WHERE user_id = ? AND contact_user_id = ?");
+	$contact_query = create_connection()->prepare("SELECT this_user_id, contact_user_id FROM Contacts WHERE this_user_id = ? AND contact_user_id = ?");
 	$contact_query->execute(array($own_user_id, $other_user_id));
 	return $contact_query->fetchObject();
 
   }
+
+  function requestSent($from_user_id, $to_user_id) {
+	$request_sent_query = create_connection()->prepare("SELECT from_user_id, to_user_id FROM Pending_requests WHERE from_user_id = ? AND to_user_id = ?");
+	$request_sent_query->execute(array($from_user_id, $to_user_id));
+	return $request_sent_query->fetchObject();
+  }	
 
   function signed_in(){
 	$user = user_info();

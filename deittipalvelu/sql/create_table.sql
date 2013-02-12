@@ -24,17 +24,17 @@ to_user_id INT,
 date_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 subject VARCHAR(255),
 message TEXT,
-FOREIGN KEY (from_user_id) REFERENCES Users(user_id),
-FOREIGN KEY (to_user_id) REFERENCES Users(user_id)
+FOREIGN KEY (from_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+FOREIGN KEY (to_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
-user_id INT,
+this_user_id INT,
 contact_user_id INT,
 date_contact_from TIMESTAMP,
-FOREIGN KEY (user_id) REFERENCES Users(user_id),
-FOREIGN KEY (contact_user_id) REFERENCES Users(user_id)
+FOREIGN KEY (this_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+FOREIGN KEY (contact_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Pending_requests(
@@ -42,6 +42,6 @@ request_id serial PRIMARY KEY,
 to_user_id INT,
 from_user_id INT,
 date_sent TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-FOREIGN KEY (to_user_id) REFERENCES Users(user_id),
-FOREIGN KEY (from_user_id) REFERENCES Users(user_id)
+FOREIGN KEY (to_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+FOREIGN KEY (from_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );

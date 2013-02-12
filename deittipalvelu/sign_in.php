@@ -12,7 +12,7 @@ if(isset($_POST["username"])){
 		else {
 		session_start();
 		$_SESSION['user_id'] = $user->user_id;
-		header('Location: index.php');
+		header('Location: own_site.php');
 		exit();
 		}
 	}

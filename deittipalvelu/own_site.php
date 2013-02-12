@@ -7,13 +7,21 @@ if (!signed_in()) {
 }
 
 if (isset($_GET["user_id"])){
+
+	$user = user_info();
+	if ($_GET["user_id"] == $user->user_id) {
+		header('Location: own_site.php');
+		exit();
+	}
 	
 	$user = user_infoa($_GET["user_id"]);
 	$user_query = create_connection()->prepare("SELECT * FROM Users WHERE user_id = ?");
 	$user_query->execute(array($user->user_id));
 	$this_user = $user_query->fetchObject();
 	$isContact = isContact($_SESSION["user_id"], $_GET["user_id"]);
+	$requestSent = requestSent($_SESSION["user_id"], $_GET["user_id"]);
 	$isUser = false;
+
 
 }
 else{
@@ -22,10 +30,10 @@ else{
 	$user_query->execute(array($user->user_id));
 	$this_user = $user_query->fetchObject();
 	
-	$contact_query = create_connection()->prepare("SELECT * FROM Contacts WHERE user_id = ?");
+	$contact_query = create_connection()->prepare("SELECT * FROM Contacts INNER JOIN Users ON Contacts.contact_user_id=Users.user_id WHERE this_user_id = ?");
 	$contact_query->execute(array($this_user->user_id));
 	
-	$request_query = create_connection()->prepare("SELECT * FROM Pending_requests WHERE to_user_id = ?");
+	$request_query = create_connection()->prepare("SELECT * FROM Pending_requests INNER JOIN Users ON Pending_requests.from_user_id=Users.user_id  WHERE to_user_id = ?");
 	$request_query->execute(array($this_user->user_id));
 
 	$isContact = true;
@@ -33,7 +41,17 @@ else{
 }
 ?>
 
+<?php if(!$isUser && isset($_SESSION["request_sent"])) { 
 
+	echo "<p>".$_SESSION["request_sent"]."</p>";
+	unset($_SESSION["request_sent"]);
+
+}if(!$isUser && isset($_SESSION["message_info"])) { 
+
+	echo "<p>".$_SESSION["message_info"]."</p>";
+	unset($_SESSION["message_info"]);
+}
+?>
 
 <h2>Oma Sivu</h2>
 
@@ -55,15 +73,15 @@ else{
 <a href="edit_info.php">Muokka tietojasi</a><br>
 <h2>Kontaktisi</h2>
 <ul>
-<?php while($contact = $contact_query->fetchObject()){ $user_query->execute(array($contact->contact_user_id)); $x = $user_query->fetchObject();?>
-		<li><a href="own_site.php?user_id=<?php echo $contact->contact_user_id; ?>"><?php echo $x->username; ?></a></li>
+<?php while($contact = $contact_query->fetchObject()){ ?>
+		<li><a href="own_site.php?user_id=<?php echo $contact->contact_user_id; ?>"><?php echo $contact->username; ?></a></li>
 <?php } ?>
 </ul>
 <h2>Kontaktipyyntösi</h2>
 <ul>
 
-<?php while($request = $request_query->fetchObject()){ $user_query->execute(array($request->from_user_id)); $x = $user_query->fetchObject();?>
-	<li><a href="own_site.php?user_id=<?php echo $request->from_user_id; ?>"><?php echo $x->username; ?></a></li>
+<?php while($request = $request_query->fetchObject()){ ?>
+	<li><a href="own_site.php?user_id=<?php echo $request->from_user_id; ?>"><?php echo $request->username; ?></a></li>
 	<form action="contact_logic.php" method="POST">
 	<input type="hidden" name="accept_user_id" value="<?php echo $request->from_user_id; ?>" />
 	<input type="submit" value="Hyväksy" />
@@ -77,7 +95,7 @@ else{
 </ul>
 <?php } ?>
 
-<?php if (!$isContact) { ?>
+<?php if (!$isContact && !$requestSent) { ?>
 	<form action="contact_logic.php" method="POST">
 		<input type="hidden" name="request_user_id" value="<?php echo $this_user->user_id; ?>" />
 		<input type="submit" value="Pyydä kontaktiksi" />
