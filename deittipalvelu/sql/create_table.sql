@@ -32,7 +32,7 @@ CREATE TABLE Contacts(
 contact_id serial PRIMARY KEY,
 this_user_id INT,
 contact_user_id INT,
-date_contact_from TIMESTAMP,
+date_contact_from TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (this_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
 FOREIGN KEY (contact_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
